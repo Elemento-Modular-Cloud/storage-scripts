@@ -15,7 +15,8 @@ MOUNT=$(df | grep /dev/$DEVICE | awk '{ print $6 }')
 
 if [[ -z $MOUNT ]] ; then
   echo Could not find mount point for $DEVICE
-  exit 1
+  MOUNT=$DEVICE
+  #exit 1
 fi
 
 echo "Mountpoint for device $DEVICE is $MOUNT"
