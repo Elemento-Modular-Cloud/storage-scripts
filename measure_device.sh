@@ -54,6 +54,7 @@ if [[ $DOONLYLATENCY != true ]] ; then
 #Sequential Write
 if [[ $DOSEQUENTIALWRITE = true ]] ; then
  echo Sequential Write QD=$SEQIODEPTH
+ echo $MOUNT/testfile
  fio --name=seq_write --filename=$MOUNT/testfile --bs=$SEQIOSIZE --rw=write --time_based --runtime=$RUNTIME --direct=1 --ioengine=libaio --iodepth=$SEQIODEPTH --output=$RUNID-$DEVICE-seq-write.out
  echo
  sleep 5
@@ -62,6 +63,7 @@ fi
 #Sequential Read
 if [[ $DOSEQUENTIALREAD = true ]] ; then
  echo Sequential Read QD=$SEQIODEPTH
+ echo $MOUNT/testfile
  fio --name=seq_read --filename=$MOUNT/testfile --bs=$SEQIOSIZE --rw=read --time_based --runtime=$RUNTIME --direct=1 --ioengine=libaio --iodepth=$SEQIODEPTH --output=$RUNID-$DEVICE-seq-read.out
  echo
  sleep 5
@@ -70,6 +72,7 @@ fi
 #Random Read
 if [[ $DORANDOMREAD = true ]] ; then
  echo Random Read QD=$TARGETRNDIODEPTH
+ echo $MOUNT/testfile
  fio --name=global --group_reporting --bs=$RNDIOSIZE --rw=randread --time_based --runtime=$RUNTIME --direct=1 --ioengine=libaio --iodepth=$RNDIODEPTH --output=$RUNID-$DEVICE-rnd-read.out --name=read1 --filename=$MOUNT/testfile --name=read2 --filename=$MOUNT/testfile2 --name=read3 --filename=$MOUNT/testfile3 --name=read4 --filename=$MOUNT/testfile4 --name=read5 --filename=$MOUNT/testfile5 --name=read6 --filename=$MOUNT/testfile6
  echo
 fi
@@ -78,6 +81,7 @@ fi
 if [[ $DORANDOMWRITE = true ]] ; then 
   echo Random Write QD-$TARGETRNDIODEPTH
   echo Per Device QD-$RNDIODEPTH
+  echo $MOUNT/testfile
   fio --name=global --group_reporting --bs=$RNDIOSIZE --rw=randwrite --time_based --runtime=$RUNTIME --direct=1 --ioengine=libaio --iodepth=$RNDIODEPTH --output=$RUNID-$DEVICE-rnd-write.out --name=write1 --filename=$MOUNT/testfile --name=write2 --filename=$MOUNT/testfile2 --name=write3 --filename=$MOUNT/testfile3 --name=write4 --filename=$MOUNT/testfile4 --name=read5 --filename=$MOUNT/testfile5 --name=read6 --filename=$MOUNT/testfile6
   echo
 fi
@@ -94,6 +98,7 @@ echo
 RNDIODEPTH=1
 if [[ $DORANDOMWRITE = true ]] ; then 
   echo Random Write QD-$RNDIODEPTH
+  echo $MOUNT/testfile
   fio --name=global --group_reporting --bs=$RNDIOSIZE --rw=randwrite --time_based --runtime=$RUNTIME --direct=1 --ioengine=libaio --iodepth=$RNDIODEPTH --output=$RUNID-$DEVICE-QE-$RNDIODEPTH-rnd-write.out --name=write1 --filename=$MOUNT/testfile --name=write2 --filename=$MOUNT/testfile2
   echo
 fi
@@ -102,6 +107,7 @@ fi
 RNDIODEPTH=1
 if [[ $DORANDOMREAD = true ]] ; then
  echo Random Read QD=$RNDIODEPTH
+ echo $MOUNT/testfile
  fio --name=global  --group_reporting --bs=$RNDIOSIZE --rw=randread --time_based --runtime=$RUNTIME --direct=1 --ioengine=libaio --iodepth=$RNDIODEPTH --output=$RUNID-$DEVICE-QD-$RNDIODEPTH-rnd-read.out --name=read1 --filename=$MOUNT/testfile --name=read2 --filename=$MOUNT/testfile2
  echo
 fi
