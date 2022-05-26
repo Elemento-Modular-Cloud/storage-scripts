@@ -64,7 +64,7 @@ fi
 if [[ $DOSEQUENTIALREAD = true ]] ; then
  echo Sequential Read QD=$SEQIODEPTH
  echo $MOUNT/testfile
- fio --name=seq_read --filename=$MOUNT/testfile --bs=$SEQIOSIZE --rw=read --time_based --runtime=$RUNTIME --direct=1 --ioengine=libaio --iodepth=$SEQIODEPTH --output=$RUNID-$DEVICE-seq-read.out
+ fio --name=seq_read --filename=$MOUNT/testfile --bs=$SEQIOSIZE --rw=read --time_based --runtime=$RUNTIME --direct=1 --ioengine=libaio --iodepth=$SEQIODEPTH --output=$RUNID-seq-read.out
  echo
  sleep 5
 fi
